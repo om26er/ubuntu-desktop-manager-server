@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^api/user/change-password$', ChangePassword.as_view()),
     url(r'^api/user/status$', Status.as_view()),
     url(r'^api/user/me$', Profile.as_view()),
-    url(r'^api/user/device/register$', DeviceRegisterAPIView.as_view()),
-    url(r'^api/user/device/', DeviceAPIView.as_view()),
-    url(r'^api/user/devices$', DeviceListAPIView.as_view()),
+    url(r'^api/user/devices/register$', DeviceRegisterAPIView.as_view()),
+    url(r'^api/user/devices/(?P<pk>\d+)$', DeviceAPIView.as_view()),
+    url(r'^api/user/devices/list$', DeviceListAPIView.as_view()),
 ]

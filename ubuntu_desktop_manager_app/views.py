@@ -53,6 +53,10 @@ class DeviceRegisterAPIView(CreateAPIView):
     serializer_class = DeviceSerializer
     permission_classes = (IsAuthenticated, )
 
+    def perform_create(self, serializer):
+        serializer.validated_data.update({'user_id': self.request.user.id})
+        super().perform_create(serializer)
+
 
 class DeviceListAPIView(ListAPIView):
     serializer_class = DeviceSerializer
@@ -71,5 +75,5 @@ class DeviceAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = DeviceSerializer
     permission_classes = (IsAuthenticated, IsOwner, )
 
-    def get_object(self):
-        return Device.object.get(id=int(self.kwargs['pk']))
+    def get_queryset(self):
+        return Device.objects.filter(id=int(self.kwargs['pk']))
